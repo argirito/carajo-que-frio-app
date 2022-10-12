@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import './App.css'
-import useGetCities from './hooks/useGetAmadeusToken'
+import useGetCities from './hooks/useGetCities'
 import { store } from './redux'
 
 function App(state: any) {
