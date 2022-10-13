@@ -1,0 +1,33 @@
+@import "remixicon/fonts/remixicon.css";
+@import "./mixins.scss";
+
+$text-color: #8783f0;
+$gradient: linear-gradient(
+  155deg,
+  rgba(41, 34, 150, 1) 0%,
+  rgba(135, 131, 240, 1) 36%,
+  rgba(0, 212, 255, 1) 87%
+);
+$separator: rgba(#0e243a, 0.04);
+$red: #d32424;
+
+html {
+  font-size: 10px;
+  cursor: default;
+}
+
+* {
+  // background-color: white;
+  @include webfont("regular");
+  font-family: -apple-system, BlinkMacSystemFont;
+}
+
+a {
+  color: $text-color;
+  text-decoration: none;
+}
+
+h3 {
+  color: $text-color;
+  @include webfont("medium");
+}

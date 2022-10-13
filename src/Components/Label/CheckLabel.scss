@@ -1,0 +1,71 @@
+@import "../../../styles/base";
+
+.check-label-container {
+  height: 5rem;
+  display: flex;
+  @include transition(opacity 0.24s);
+
+  &:hover {
+    .check-label {
+      @include transition(margin-bottom 0.14s);
+
+      margin-bottom: 1rem;
+    }
+
+    .check-label-icon {
+      @include transition(top 0.24s);
+
+      top: -4px;
+    }
+
+    .remixicon-icon.check {
+      @include transition(opacity 0.24s);
+      opacity: 0;
+    }
+    .remixicon-icon.check-double {
+      @include transition(opacity 0.24s);
+      opacity: 1;
+    }
+  }
+}
+
+.check-label {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  grid-gap: 1rem;
+  margin-bottom: 0.8rem;
+  margin-top: 0.8rem;
+  @include transition(margin-bottom 0.14s);
+}
+
+.check-label-icon {
+  position: relative;
+
+  @include size(2.4rem);
+  border-radius: 50px;
+  background: linear-gradient(225deg, #e6e6e6, #ffffff);
+  box-shadow: -3px 3px 7px #d9d9d9, inset 3px -3px 20px #ffffff;
+  color: $text-color;
+
+  .remixicon-icon {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    @include transition(top 0.24s);
+    @include transition(opacity 0.24s);
+    @include size(1.8rem);
+  }
+
+  .remixicon-icon.check {
+    opacity: 1;
+  }
+  .remixicon-icon.check-double {
+    opacity: 0;
+  }
+}
+
+.check-label {
+  cursor: default;
+  font-size: 1.6rem;
+}

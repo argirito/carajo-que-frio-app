@@ -1,0 +1,11 @@
+@import '../../../styles/base';
+
+.text-area {
+
+  textarea {
+    border: 1px solid $text-color;
+    border-radius: 4px;
+    width: 100%;
+    min-height: 12rem;
+  }
+}

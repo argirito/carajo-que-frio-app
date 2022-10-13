@@ -1,0 +1,7 @@
+@import '../../styles/base';
+
+label {
+  font-size: 1.4rem;
+  color: $text-color;
+  @include webfont('medium');
+}

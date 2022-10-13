@@ -1,11 +1,3 @@
-const incrementAction = {
-  type: 'INCREMENT'
-}
-
-const decrementAction = {
-  type: 'DECREMENT'
-}
-
 export default function WeatherReducer(state: any = 0, { type, payload }: any) {
   switch (type) {
     case 'INCREMENT':

@@ -1,0 +1,35 @@
+$font-weights: (
+  light: (
+    weight: 300,
+  ),
+  regular: (
+    weight: 400,
+  ),
+  medium: (
+    weight: 500,
+  ),
+  semibold: (
+    weight: 700,
+  ),
+  bold: (
+    weight: 800,
+  ),
+);
+
+@mixin size($width, $height: $width) {
+  width: $width;
+  height: $height;
+}
+
+@mixin webfont($name: "regular") {
+  $font-params: map-get($font-weights, $name);
+  $font-weight: map-get($font-params, "weight");
+  font-weight: $font-weight;
+}
+
+@mixin transition($transition...) {
+  -moz-transition: $transition;
+  -o-transition: $transition;
+  -webkit-transition: $transition;
+  transition: $transition;
+}

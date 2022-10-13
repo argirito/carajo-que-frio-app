@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { useCallback, useEffect, useState } from 'react'
 
-function useGetCities() {
+function useGetCities(text: string) {
   const [cities, setCities] = useState<any[]>([])
 
   const getToken = useCallback(async () => {
@@ -26,6 +26,8 @@ function useGetCities() {
       })
 
       setCities(resCities.data)
+
+      console.log('eeeee')
     } catch (error) {
       console.log(error)
     }

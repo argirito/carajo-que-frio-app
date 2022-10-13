@@ -1,0 +1,17 @@
+@import "../../../styles/base";
+
+.list-label {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  grid-gap: 0.4rem;
+  margin: 1rem 0;
+}
+
+.list-label-icon {
+  color: $text-color;
+}
+
+.list-label-text {
+  font-size: 1.8rem;
+}

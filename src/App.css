@@ -1,5 +1,8 @@
 .App {
   text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .App-logo {
@@ -11,6 +14,18 @@
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
+}
+
+.input-cities,
+.button-cities {
+  width: 200px;
+  margin: 2rem;
+}
+
+.city-item {
+  display: flex;
+  grid-gap: 1rem;
+  font-size: 1.6rem;
 }
 
 .App-header {

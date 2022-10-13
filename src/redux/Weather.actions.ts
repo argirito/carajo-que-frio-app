@@ -5,7 +5,3 @@ export const incrementAction = {
 export const decrementAction = {
   type: 'DECREMENT'
 }
-// export const weatherAction = (payload: any) => ({
-//   type: 'REQUEST',
-//   payload
-// })
