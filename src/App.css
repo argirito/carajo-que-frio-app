@@ -28,6 +28,11 @@
   font-size: 1.6rem;
 }
 
+.img-cloud {
+  width: 200px;
+  height: 100%;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
