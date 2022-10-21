@@ -1,7 +1,7 @@
-@import "remixicon/fonts/remixicon.css";
-@import "./mixins.scss";
+@import 'remixicon/fonts/remixicon.css';
+@import './mixins.scss';
 
-$text-color: #8783f0;
+$text-color: darkturquoise;
 $gradient: linear-gradient(
   155deg,
   rgba(41, 34, 150, 1) 0%,
@@ -16,9 +16,24 @@ html {
   cursor: default;
 }
 
+*::-webkit-scrollbar-thumb {
+  background-color: white;
+  border: none;
+  border-radius: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+
 * {
   // background-color: white;
-  @include webfont("regular");
+  @include webfont('regular');
   font-family: -apple-system, BlinkMacSystemFont;
 }
 
@@ -29,5 +44,5 @@ a {
 
 h3 {
   color: $text-color;
-  @include webfont("medium");
+  @include webfont('medium');
 }

@@ -1,0 +1,14 @@
+@import '../../styles/base';
+
+.cities-column-input {
+  display: flex;
+  display: row;
+  align-items: center;
+  grid-gap: 1rem;
+}
+.input-cities {
+  width: 200px;
+}
+.button-cities {
+  width: 5rem;
+}

@@ -1,0 +1,46 @@
+@import '../../styles/base';
+
+.widget-hour {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: row;
+  width: inherit;
+  overflow-x: scroll;
+  min-height: 13vh;
+}
+
+.widget-hour::-webkit-scrollbar {
+  display: none;
+}
+
+.inner-widget-hour {
+  display: flex;
+  flex-flow: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: fit-content;
+  box-sizing: border-box;
+  height: 9vh;
+}
+
+.widget-hour-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  grid-gap: 0.6rem;
+  margin: 0.4rem 0;
+  padding: 0.8rem 1.6rem;
+  height: 3rem;
+}
+
+.widget-hour-hour,
+.widget-hour-temp {
+  font-size: 1.5rem;
+  color: white;
+  @include webfont('semibold');
+}
+
+.widget-hour-icon {
+  @include size(auto, 2rem);
+}

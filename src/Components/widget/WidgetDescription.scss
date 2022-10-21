@@ -1,0 +1,54 @@
+@import '../../styles/base';
+
+.widget-gif {
+  width: 200px;
+  height: 100%;
+}
+
+.widget-description {
+  height: 18rem;
+  width: 100%;
+}
+
+.widget-info {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  @include size(30rem, 100%);
+  width: 100%;
+  padding: 2rem;
+}
+
+.widget-info-city {
+  position: relative;
+  z-index: 2;
+  font-size: 5rem;
+  color: rgb(40, 242, 245);
+  @include webfont('semibold');
+  margin-bottom: 0.4rem;
+  width: 37.5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.widget-info-description {
+  width: 100%;
+  color: white;
+  font-size: 2.4rem;
+  @include webfont('semibold');
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+.widget-info-temp-container {
+  display: flex;
+  grid-gap: 1rem;
+  font-size: 1.8rem;
+}
+
+.widget-info-temp {
+  color: white;
+  @include webfont('medium');
+}

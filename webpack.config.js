@@ -13,21 +13,28 @@ module.exports = {
       },
       {
         test: /\.(css|scss)$/,
-        use: [
-          // MiniCssExtractPlugin.loader,
-          'style-loader',
-          'css-loader',
-          'sass-loader',
-          'scss-loader',
-          'sass',
-          {
-            loader: 'sass-loader',
-            options: {
-              implementation: require('sass')
-              // includePaths: [path.resolve(__dirname, 'node_modules')]
+        use:
+          // [
+          //   'css-loader',
+          //   'postcss-loader',
+          //   'sass-loader',
+          //   'resolve-url-loader'
+          // ]
+          [
+            // MiniCssExtractPlugin.loader,
+            'style-loader',
+            'css-loader',
+            'sass-loader',
+            'scss-loader',
+            'sass',
+            {
+              loader: 'sass-loader',
+              options: {
+                implementation: require('sass')
+                // includePaths: [path.resolve(__dirname, 'node_modules')]
+              }
             }
-          }
-        ]
+          ]
       }
     ]
   },

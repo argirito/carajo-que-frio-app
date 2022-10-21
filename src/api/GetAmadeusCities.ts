@@ -27,14 +27,6 @@ export const getAmadeusCities = (text: string): Promise<any> =>
 
       const { data } = resCities.data
 
-      console.log(
-        'gfes',
-        data.filter(
-          ({ name }: any) =>
-            removeAccents(name.toLowerCase()) === textWithoutFormat
-        )
-      )
-
       const filtered = data.filter(
         ({ name }: any) =>
           removeAccents(name.toLowerCase()) === textWithoutFormat

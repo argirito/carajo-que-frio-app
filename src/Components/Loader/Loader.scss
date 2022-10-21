@@ -1,0 +1,14 @@
+@import '../../styles/base';
+
+.loader-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: inherit;
+  height: inherit;
+  width: 100%;
+}
+
+.loader-gif {
+  @include size(15rem);
+}
