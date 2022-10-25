@@ -6,12 +6,16 @@ import CitiesColumn from './Components/CitiesColumn/CitiesColumn'
 import Widget from './Components/widget/Widget'
 import WidgetDescription from './Components/widget/WidgetDescription'
 import WidgetHour from './Components/widget/WidgetHourly'
-// import cloud from './Images/cloud.gif'
+import WidgetForecast from './Components/widget/WidgetForecast'
+
+type HourlyData = { code: number[]; hour: Date[]; temp: number[] }
+
+export const c = console.log.bind(document)
 
 function App(state: any) {
   const [lat, setLat] = useState(0)
   const [lon, setLon] = useState(0)
-  const [hourly, setHourly] = useState({})
+  const [hourly, setHourly] = useState<any>()
   const [cities, setCities] = useState<any[]>([])
 
   return (
@@ -47,8 +51,11 @@ function App(state: any) {
                 onGetHourly={(data: any) => setHourly(data)}
               />
             </Widget>
-            <Widget>
+            <Widget title="Previsión por horas (48h)">
               <WidgetHour hourly={hourly} />
+            </Widget>
+            <Widget title="Previsión por días (7 días)">
+              <WidgetForecast hourly={hourly} />
             </Widget>
           </div>
         </div>

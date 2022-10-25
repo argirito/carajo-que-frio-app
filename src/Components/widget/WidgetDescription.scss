@@ -6,7 +6,9 @@
 }
 
 .widget-description {
-  height: 18rem;
+  display: flex;
+  align-items: center;
+  min-height: 16rem;
   width: 100%;
 }
 
@@ -16,27 +18,33 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  @include size(30rem, 100%);
-  width: 100%;
-  padding: 2rem;
+  justify-content: center;
+  @include size(22rem, 100%);
+  padding-left: 2rem;
+  margin: 1.6rem 0;
+}
+
+.widget-info-actual {
+  text-align: center;
+  width: 17rem;
+  font-size: 10rem;
+  @include webfont('medium');
+  color: white;
 }
 
 .widget-info-city {
   position: relative;
   z-index: 2;
-  font-size: 5rem;
+  font-size: 4rem;
   color: rgb(40, 242, 245);
   @include webfont('semibold');
   margin-bottom: 0.4rem;
-  width: 37.5rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  width: 22rem;
 }
 .widget-info-description {
   width: 100%;
   color: white;
-  font-size: 2.4rem;
+  font-size: 2rem;
   @include webfont('semibold');
   margin-bottom: 2rem;
   text-align: left;

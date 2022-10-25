@@ -3,22 +3,26 @@ import './WidgetDescription.scss'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 import Loader from '../Loader/Loader'
+import { c } from '../../App'
 
-function DescriptionType(text: string) {
-  if (text === 'Clear') {
+const typeWeather = (code: number) => {
+  if ([0, 1].indexOf(code) > -1) {
     return 'Despejadito para ti.'
   }
-  if (text === 'Rain') {
-    return 'Lluvia pa refrescar el ambiente.'
-  }
-  if (text === 'Clouds') {
+  if ([2, 3].indexOf(code) > -1) {
     return 'Un poco nublado no te voy a mentir.'
   }
-  if (text === 'Snow') {
-    return 'Nievee.'
+  if ([45, 48].indexOf(code) > -1) {
+    return 'Niebla pero no mucha'
   }
-
-  return text
+  if ([60, 61, 62, 63, 80, 81, 82].indexOf(code) > -1) {
+    return 'Lluvia pa refrescar el ambiente.'
+  }
+  if ([95, 96, 99].indexOf(code) > -1) {
+    return 'Una tormenta importante'
+  }
+  console.log(code)
+  return 'ERR'
 }
 
 function WidgetDescription({
@@ -30,32 +34,21 @@ function WidgetDescription({
   lon: number
   onGetHourly: (data: any) => void
 }) {
-  const [description, setDescription] = useState('')
+  const [description, setDescription] = useState(0)
   const [cityName, setCityName] = useState('')
   const [minTemp, setMinTemp] = useState(0)
   const [maxTemp, setMaxTemp] = useState(0)
+  const [actualTemp, setActualTemp] = useState(0)
   const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState(false)
 
   useEffect(() => {
     if (lat !== 0) {
-      // ubicacion actual de la persona o ver si no tiene favorito
       clima(lat, lon)
     } else {
-      clima(lat, lon)
-
-      let allowGeo = false
-      navigator.geolocation.getCurrentPosition((position) => {
-        const lat = position.coords.latitude
-        const long = position.coords.longitude
-        allowGeo = true
-        clima(lat, long)
-      })
-
-      if (!allowGeo) {
-        clima(40.4167, -3.7033)
-      }
+      clima(40.4167, -3.7033)
     }
-  }, [lat])
+  }, [lat, lon])
 
   const clima = async (lat: number, lon: number) => {
     try {
@@ -67,9 +60,13 @@ function WidgetDescription({
 
       const { city, list } = res.data
 
-      console.log(res.data)
+      // console.log(res.data)
 
-      setCityName(city.name === 'Sol' ? 'Madrid' : city.name)
+      setCityName(
+        city.name === 'Sol'
+          ? 'Madrid'
+          : city.name.split(' ').slice(0, 2).join(' ')
+      )
       setDescription(list[0].weather[0].main)
 
       const resHourly = await axios({
@@ -78,21 +75,34 @@ function WidgetDescription({
       })
 
       const { hourly } = resHourly.data
-      console.log(hourly)
+
+      // c(hourly)
 
       onGetHourly({
-        temp: hourly.temperature_2m.slice(0, 48),
-        hour: hourly.time.slice(0, 48),
-        code: hourly.weathercode.slice(0, 48)
+        temp: hourly.temperature_2m,
+        hour: hourly.time,
+        code: hourly.weathercode
       })
+
+      setDescription(hourly.weathercode[0])
+
+      const date = new Date()
+      const actualHour = date.getHours()
+
+      setActualTemp(hourly.temperature_2m[actualHour])
 
       setMinTemp(Math.min(...hourly.temperature_2m.slice(0, 24)))
       setMaxTemp(Math.max(...hourly.temperature_2m.slice(0, 24)))
     } catch (error: any) {
       console.log(error)
+      setError(true)
     } finally {
       setIsLoading(false)
     }
+  }
+
+  if (error) {
+    return <div className="">Ha ocurrido un error, mis disculpas</div>
   }
 
   return (
@@ -104,19 +114,15 @@ function WidgetDescription({
           <div className="widget-info">
             <div className="widget-info-city">{cityName}</div>
             <div className="widget-info-description">
-              {DescriptionType(description)}
+              {/* {DescriptionType(description)} */}
+              {typeWeather(description)}
             </div>
             <div className="widget-info-temp-container">
               <div className="widget-info-temp">Min {minTemp}º</div>
               <div className="widget-info-temp">Max {maxTemp}º</div>
             </div>
           </div>
-          {/* <img
-      className="widget-gif"
-      // src={require(`../../Images/sun.gif`)}
-      src={require(`../../Images/${ImageWeatherType(description)}.gif`)}
-      alt=""
-    /> */}
+          <div className="widget-info-actual">{Math.trunc(actualTemp)}º</div>
         </>
       )}
     </div>

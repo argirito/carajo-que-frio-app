@@ -23,8 +23,19 @@ const isNight = (): boolean => {
   return date.getHours() >= 22 || date.getHours() <= 6
 }
 
-function Widget({ children }: { children: React.ReactNode }) {
-  return <div className="widget-container">{children}</div>
+function Widget({
+  children,
+  title
+}: {
+  children: React.ReactNode
+  title?: string
+}) {
+  return (
+    <div className="widget-container">
+      {title && <div className="widget-title">{title}</div>}
+      {children}
+    </div>
+  )
 }
 
 export default Widget

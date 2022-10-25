@@ -3,9 +3,9 @@
 .widget-container {
   // position: relative;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
-  @include size(45rem, auto);
+  @include size(40rem, auto);
   // border: 1px solid rgb(8, 244, 248);
   border-radius: 12px;
   margin: 2rem 0;
@@ -31,4 +31,14 @@
     box-shadow: 5px 3px 5px rgba(40, 242, 245, 0.4);
     box-shadow: 0px 0px 8px rgba(white, 0.2);
   }
+}
+
+.widget-title {
+  font-size: 1.8rem;
+  @include webfont('medium');
+  color: white;
+  margin-left: 1.6rem;
+  margin-top: 1.6rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid rgba(white, 0.4);
 }

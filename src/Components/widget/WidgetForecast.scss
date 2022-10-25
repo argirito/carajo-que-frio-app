@@ -1,0 +1,50 @@
+@import '../../styles/base';
+
+.inner-widget-forecast {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  padding: 1.6rem;
+}
+
+.widget-forecast-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.8rem 0;
+}
+
+.widget-forecast-icon {
+  @include size(auto, 2rem);
+}
+
+.widget-forecast-text,
+.widget-forecast-temp {
+  font-size: 1.8rem;
+  color: white;
+  @include webfont('semibold');
+  width: 2.2rem;
+}
+
+.widget-forecast-temp {
+  margin-right: 0.4rem;
+}
+
+.widget-forecast-temp-separator {
+  width: 9rem;
+  height: 0.4rem;
+  border-radius: 10px;
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.267);
+
+  &.h_sun {
+    background-color: rgb(255, 221, 29);
+    // background-color: rgb(225, 192, 5);
+  }
+  &.h_rain {
+    background-color: rgb(0, 153, 235);
+  }
+  &.h_storm {
+    background-color: rgb(75, 75, 75);
+  }
+}

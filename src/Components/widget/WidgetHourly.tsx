@@ -4,17 +4,21 @@ import { useEffect, useState } from 'react'
 import Loader from '../Loader/Loader'
 
 type hourItem = {
-  temp: number
-  hour: string
-  code: number
+  temp: number[]
+  hour: string[]
+  code: number[]
 }
 
-const getHour = (text: string) => {
-  return text.split('').slice(11, 13).join('')
+export const getHour = (text: string) => {
+  if (text === 'Ahora') return 'Ahora'
+  else {
+    const date = new Date(text)
+    return date.getHours()
+  }
 }
 
-const typeWeather = (code: number) => {
-  if (code === 1) {
+export const typeWeather = (code: number) => {
+  if ([0, 1].indexOf(code) > -1) {
     return 'h_sun'
   }
   if (code === 2) {
@@ -26,27 +30,38 @@ const typeWeather = (code: number) => {
   if ([45, 48].indexOf(code) > -1) {
     return 'h_fog'
   }
-  if ([60, 61, 62, 80, 81, 82].indexOf(code) > -1) {
+  if ([60, 61, 62, 63, 80, 81, 82].indexOf(code) > -1) {
     return 'h_rain'
   }
-  return 'h_sun'
+  if ([95, 96, 99].indexOf(code) > -1) {
+    return 'h_storm'
+  }
+  console.log(code)
+  return 'ERR'
 }
 
 function WidgetHour({ hourly }: { hourly: any }) {
   const [hours, setHours] = useState<hourItem[]>([])
   const [isLoading, setIsLoading] = useState(true)
 
+  // console.log(hourly)
+
   useEffect(() => {
-    if (hourly.temp && hourly.temp.length > 0) {
+    if (hourly?.temp && hourly.temp.length > 0) {
       const h: any[] = []
       const date = new Date()
       const actualHour = date.getHours()
-      const slide = hourly.temp.length - actualHour
 
-      for (let i = actualHour; i < hourly.temp.length; i++) {
+      // h.push({
+      //   temp: hourly.temp[actualHour],
+      //   hour: 'Ahora',
+      //   code: hourly.code[actualHour]
+      // })
+
+      for (let i = 0; i < 48; i++) {
+        // for (let i = actualHour + 1; i < 35; i++) {
         h.push({
           temp: hourly.temp[i],
-          // hour: getHour(hourly.hour[i]),
           hour: hourly.hour[i],
           code: hourly.code[i]
         })
@@ -83,19 +98,37 @@ function WidgetHour({ hourly }: { hourly: any }) {
       {isLoading ? (
         <Loader />
       ) : (
-        <div className="inner-widget-hour">
-          {hours.map((item: any, index: number) => (
-            <div key={index} className="widget-hour-item">
-              <div className="widget-hour-hour">{getHour(item.hour)} </div>
-              <img
-                className="widget-hour-icon"
-                src={require(`../../Images/${typeWeather(item.code)}.png`)}
-                alt=""
-              />
-              <div className="widget-hour-temp">{item.temp} </div>
-            </div>
-          ))}
-        </div>
+        <>
+          <div className="inner-widget-hour">
+            {hours.slice(0, 24).map((item: any, index: number) => (
+              <div key={index} className="widget-hour-item">
+                <div className="widget-hour-text">{getHour(item.hour)} </div>
+                <img
+                  className="widget-hour-icon"
+                  src={require(`../../Images/${typeWeather(item.code)}.png`)}
+                  alt=""
+                />
+                <div className="widget-hour-temp">
+                  {Math.trunc(item.temp)}º{' '}
+                </div>
+              </div>
+            ))}
+            <div className="widget-hour-separator"></div>
+            {hours.slice(0, 24).map((item: any, index: number) => (
+              <div key={index} className="widget-hour-item">
+                <div className="widget-hour-text">{getHour(item.hour)} </div>
+                <img
+                  className="widget-hour-icon"
+                  src={require(`../../Images/${typeWeather(item.code)}.png`)}
+                  alt=""
+                />
+                <div className="widget-hour-temp">
+                  {Math.trunc(item.temp)}º{' '}
+                </div>
+              </div>
+            ))}
+          </div>
+        </>
       )}
     </div>
   )

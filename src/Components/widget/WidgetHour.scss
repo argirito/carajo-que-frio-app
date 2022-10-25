@@ -8,10 +8,19 @@
   width: inherit;
   overflow-x: scroll;
   min-height: 13vh;
+  // padding-left: 1.6rem;
 }
 
 .widget-hour::-webkit-scrollbar {
   display: none;
+}
+
+.widget-hour-title {
+  position: absolute;
+  font-size: 1.4rem;
+  top: 10px;
+  @include webfont('medium');
+  color: white;
 }
 
 .inner-widget-hour {
@@ -30,11 +39,24 @@
   align-items: center;
   grid-gap: 0.6rem;
   margin: 0.4rem 0;
-  padding: 0.8rem 1.6rem;
+  padding: 0.8rem 0rem;
+  margin-right: 2.4rem;
   height: 3rem;
+
+  &:first-child {
+    margin-left: 1.6rem;
+  }
 }
 
-.widget-hour-hour,
+.widget-hour-separator {
+  height: 6rem;
+  color: white;
+  border-left: 2px solid white;
+  margin-right: 2rem;
+  margin-top: 2.8rem;
+}
+
+.widget-hour-text,
 .widget-hour-temp {
   font-size: 1.5rem;
   color: white;
