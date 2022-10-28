@@ -2,6 +2,7 @@ import './WidgetHour.scss'
 
 import { useEffect, useState } from 'react'
 import Loader from '../Loader/Loader'
+import { countryTimeZone } from '../../utils/Utils'
 
 type hourItem = {
   temp: number[]
@@ -43,23 +44,27 @@ export const typeWeather = (code: number) => {
 function WidgetHour({ hourly }: { hourly: any }) {
   const [hours, setHours] = useState<hourItem[]>([])
   const [isLoading, setIsLoading] = useState(true)
-
-  // console.log(hourly)
+  const [actualHour, setActualHour] = useState(0)
 
   useEffect(() => {
-    if (hourly?.temp && hourly.temp.length > 0) {
+    if (hourly?.temp && hourly.temp.length > 0 && hourly.code && hourly.date) {
       const h: any[] = []
-      const date = new Date()
-      const actualHour = date.getHours()
 
-      // h.push({
-      //   temp: hourly.temp[actualHour],
-      //   hour: 'Ahora',
-      //   code: hourly.code[actualHour]
-      // })
+      console.log('sssssss', hourly, hourly.code[0])
+      const country = countryTimeZone.getCountry(hourly.country)
+
+      const dateHour = new Date(
+        (typeof hourly.date === 'string'
+          ? new Date(hourly.date)
+          : hourly.date
+        ).toLocaleString('en-US', {
+          timeZone: country.timezones[0]
+        })
+      )
+
+      setActualHour(dateHour.getHours())
 
       for (let i = 0; i < 48; i++) {
-        // for (let i = actualHour + 1; i < 35; i++) {
         h.push({
           temp: hourly.temp[i],
           hour: hourly.hour[i],
@@ -100,9 +105,11 @@ function WidgetHour({ hourly }: { hourly: any }) {
       ) : (
         <>
           <div className="inner-widget-hour">
-            {hours.slice(0, 24).map((item: any, index: number) => (
+            {hours.slice(actualHour, 24).map((item: any, index: number) => (
               <div key={index} className="widget-hour-item">
-                <div className="widget-hour-text">{getHour(item.hour)} </div>
+                <div className="widget-hour-text">
+                  {index === 0 ? 'Ahora' : getHour(item.hour)}{' '}
+                </div>
                 <img
                   className="widget-hour-icon"
                   src={require(`../../Images/${typeWeather(item.code)}.png`)}

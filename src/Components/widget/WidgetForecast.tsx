@@ -6,8 +6,6 @@ import { getHour, typeWeather } from './WidgetHourly'
 
 const dias = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb']
 
-// [ { hour: ,  }]
-
 type DayForeCast = {
   day: string
   code: number
@@ -38,12 +36,10 @@ function WidgetForecast({ hourly }: { hourly: any }) {
   const [hours, setHours] = useState<DayForeCast[]>([])
   const [isLoading, setIsLoading] = useState(false)
 
-  if (hourly) {
-    console.log(hourly.code.slice(144, 168))
-  }
-
   useEffect(() => {
+    setIsLoading(true)
     if (hourly?.temp && hourly.temp.length > 0) {
+      setIsLoading(false)
       const h = [
         DayInfo(hourly, 0, 24, true),
         DayInfo(hourly, 24, 48),
@@ -57,8 +53,6 @@ function WidgetForecast({ hourly }: { hourly: any }) {
       setHours(h)
     }
   }, [hourly])
-
-  console.log(hours)
 
   return (
     <div className="widget-forecast-container">

@@ -3,7 +3,6 @@ import './WidgetDescription.scss'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 import Loader from '../Loader/Loader'
-import { c } from '../../App'
 
 const typeWeather = (code: number) => {
   if ([0, 1].indexOf(code) > -1) {
@@ -21,7 +20,6 @@ const typeWeather = (code: number) => {
   if ([95, 96, 99].indexOf(code) > -1) {
     return 'Una tormenta importante'
   }
-  console.log(code)
   return 'ERR'
 }
 
@@ -60,12 +58,12 @@ function WidgetDescription({
 
       const { city, list } = res.data
 
-      // console.log(res.data)
+      console.log(res.data)
 
       setCityName(
         city.name === 'Sol'
           ? 'Madrid'
-          : city.name.split(' ').slice(0, 2).join(' ')
+          : city.name.split(' ').slice(0, 3).join(' ')
       )
       setDescription(list[0].weather[0].main)
 
@@ -79,6 +77,8 @@ function WidgetDescription({
       // c(hourly)
 
       onGetHourly({
+        country: city.country,
+        date: list[0].dt_txt,
         temp: hourly.temperature_2m,
         hour: hourly.time,
         code: hourly.weathercode

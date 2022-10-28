@@ -12,7 +12,7 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  @include size(90rem, 76rem);
+  @include size(90rem, 82rem);
   border-radius: 12px;
   // margin: 20rem;
 
@@ -23,7 +23,7 @@
     height: 100%;
     top: 0;
     left: 0;
-    // background-color: rgba(black, 0.2);
+    background-color: rgba(black, 0.2);
     border-radius: 12px;
   }
 }

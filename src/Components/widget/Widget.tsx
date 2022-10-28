@@ -18,8 +18,13 @@ function ImageWeatherType(text: string) {
   }
 }
 
-const isNight = (): boolean => {
-  const date = new Date()
+export const isNight = (d?: Date): boolean => {
+  let date = new Date()
+
+  if (d) {
+    date = d
+  }
+
   return date.getHours() >= 22 || date.getHours() <= 6
 }
 

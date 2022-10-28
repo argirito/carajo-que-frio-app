@@ -36,7 +36,8 @@
   position: relative;
   z-index: 2;
   font-size: 4rem;
-  color: rgb(40, 242, 245);
+  color: white;
+  // color: rgb(40, 242, 245);
   @include webfont('semibold');
   margin-bottom: 0.4rem;
   width: 22rem;

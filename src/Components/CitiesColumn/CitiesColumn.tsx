@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react'
 import { getAmadeusCities } from '../../api/GetAmadeusCities'
 import Button from '../Button/Button'
 import Input from '../Input/Input'
-import { c } from '../../App'
 
 const region = new Intl.DisplayNames(['en'], { type: 'region' })
 

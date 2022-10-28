@@ -41,7 +41,7 @@
   margin: 0.4rem 0;
   padding: 0.8rem 0rem;
   margin-right: 2.4rem;
-  height: 3rem;
+  @include size(3.2rem, 3rem);
 
   &:first-child {
     margin-left: 1.6rem;
