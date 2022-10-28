@@ -44,6 +44,7 @@
   },
   "devDependencies": {
     "css-loader": "^6.7.1",
+    "husky": "^8.0.1",
     "mini-css-extract-plugin": "^2.6.1",
     "redux-devtools-extension": "^2.13.9",
     "sass": "^1.55.0",
