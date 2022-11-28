@@ -1,5 +1,9 @@
 @import '../../styles/base';
 
+.cities-column-container {
+  margin: 2rem;
+}
+
 .cities-column-input {
   display: flex;
   display: row;
@@ -8,7 +12,58 @@
 }
 .input-cities {
   width: 200px;
+  height: 4rem;
 }
 .button-cities {
   width: 5rem;
+}
+
+.button.button-cities {
+  button {
+    background-color: rgba(white, 0.3);
+
+    &:hover {
+      background-color: rgba(white, 0.2);
+    }
+  }
+
+  .remixicon-icon {
+    @include size(2rem);
+  }
+
+  &.disabled {
+    cursor: default;
+    opacity: 0.5;
+  }
+}
+
+.city-map {
+  height: 80rem;
+  overflow: auto;
+}
+
+.city-item {
+  margin: 1rem 0;
+  color: white;
+  @include webfont('medium');
+  cursor: pointer;
+
+  &:hover {
+    text-shadow: 1px 1px 10px rgba(white, 0.7);
+  }
+}
+
+.city-not-found {
+  margin: 2rem;
+}
+
+.city-not-found-text {
+  text-align: center;
+  color: white;
+  font-size: 1.8rem;
+  @include webfont('medium');
+}
+
+.city-not-found-image {
+  @include size(20rem, auto);
 }

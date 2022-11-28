@@ -1,19 +1,20 @@
 @import '../../styles/base';
 
 .widget-container {
-  // position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   @include size(40rem, auto);
-  // border: 1px solid rgb(8, 244, 248);
   border-radius: 12px;
-  margin: 2rem 0;
+  margin-top: 2rem;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   backdrop-filter: blur(4px);
-  // border-radius: 50px;
+
+  &.small {
+    @include size(18rem, auto);
+  }
 
   &::after {
     content: '';
@@ -34,11 +35,19 @@
 }
 
 .widget-title {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
   font-size: 1.8rem;
   @include webfont('medium');
   color: white;
-  margin-left: 1.6rem;
+  // margin-left: 1.6rem;
   margin-top: 1.6rem;
   padding-bottom: 0.8rem;
   border-bottom: 1px solid rgba(white, 0.4);
+
+  &.small {
+    // margin-left: 1rem;
+    margin-top: 1rem;
+  }
 }

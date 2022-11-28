@@ -61,3 +61,13 @@
   color: white;
   @include webfont('medium');
 }
+
+.widget-description-error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 16rem;
+  margin: 2rem;
+  color: rgba(#702622, 0.7);
+  font-size: 2rem;
+}

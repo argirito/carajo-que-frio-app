@@ -2,7 +2,7 @@ import './WidgetForecast.scss'
 
 import { useEffect, useState } from 'react'
 import Loader from '../Loader/Loader'
-import { getHour, typeWeather } from './WidgetHourly'
+import { typeWeather } from './WidgetHourly'
 
 const dias = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb']
 

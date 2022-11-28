@@ -1,43 +1,47 @@
 import './Widget.scss'
 
-function ImageWeatherType(text: string) {
-  if (text === 'Clear') {
-    return isNight() ? 'moon' : 'sun'
-  }
-  if (text === 'Rain') {
-    return 'cloud-rain'
-  }
-  if (text === 'Snow') {
-    return 'cloud-snow'
-  }
-  if (text === 'Clouds') {
-    return 'cloud'
-  }
-  if (text === '') {
-    return 'sun'
-  }
-}
-
 export const isNight = (d?: Date): boolean => {
   let date = new Date()
 
   if (d) {
     date = d
   }
+  return date.getHours() >= 21 || date.getHours() <= 6
+}
 
-  return date.getHours() >= 22 || date.getHours() <= 6
+export enum WidgetSize {
+  Small = 'small',
+  Normal = 'normal'
 }
 
 function Widget({
   children,
-  title
+  title,
+  icon,
+  iconText,
+  size
 }: {
   children: React.ReactNode
   title?: string
+  icon?: React.ReactNode
+  iconText?: string
+  size?: WidgetSize
 }) {
   return (
-    <div className="widget-container">
-      {title && <div className="widget-title">{title}</div>}
+    <div
+      className={`widget-container ${size === WidgetSize.Small && 'small'} `}
+    >
+      {title && (
+        <div
+          className={`widget-title ${size === WidgetSize.Small && 'small'} `}
+        >
+          {icon && <div className="widget-title-icon">{icon}</div>}
+          {iconText && ' ' && (
+            <div className="widget-title-icontext">{iconText}</div>
+          )}
+          {title}
+        </div>
+      )}
       {children}
     </div>
   )

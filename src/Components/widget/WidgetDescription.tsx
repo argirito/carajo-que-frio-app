@@ -1,10 +1,11 @@
 import './WidgetDescription.scss'
 
 import axios from 'axios'
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import { ActualHourCountry } from '../../utils/Utils'
 import Loader from '../Loader/Loader'
 
-const typeWeather = (code: number) => {
+const typeWeatherDescription = (code: number) => {
   if ([0, 1].indexOf(code) > -1) {
     return 'Despejadito para ti.'
   }
@@ -26,27 +27,43 @@ const typeWeather = (code: number) => {
 function WidgetDescription({
   lat,
   lon,
+  cityName,
   onGetHourly
 }: {
   lat: number
   lon: number
+  cityName: string
   onGetHourly: (data: any) => void
 }) {
   const [description, setDescription] = useState(0)
-  const [cityName, setCityName] = useState('')
   const [minTemp, setMinTemp] = useState(0)
   const [maxTemp, setMaxTemp] = useState(0)
   const [actualTemp, setActualTemp] = useState(0)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(false)
+  const [innerCityName, setInnerCityName] = useState(cityName)
 
   useEffect(() => {
     if (lat !== 0) {
       clima(lat, lon)
     } else {
-      clima(40.4167, -3.7033)
+      if (localStorage.getItem('cityDetails')) {
+        const storageLat = JSON.parse(localStorage.getItem('cityDetails')).lat
+        const storageLon = JSON.parse(localStorage.getItem('cityDetails')).lon
+        const storageName = JSON.parse(localStorage.getItem('cityDetails')).name
+        setInnerCityName(storageName)
+        clima(storageLat, storageLon)
+      } else {
+        clima(40.4167, -3.7033)
+      }
     }
   }, [lat, lon])
+
+  useEffect(() => {
+    if (cityName) {
+      setInnerCityName(cityName)
+    }
+  }, [cityName])
 
   const clima = async (lat: number, lon: number) => {
     try {
@@ -60,12 +77,7 @@ function WidgetDescription({
 
       console.log(res.data)
 
-      setCityName(
-        city.name === 'Sol'
-          ? 'Madrid'
-          : city.name.split(' ').slice(0, 3).join(' ')
-      )
-      setDescription(list[0].weather[0].main)
+      // setDescription(list[0].weather[0].main)
 
       const resHourly = await axios({
         url: `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=temperature_2m,weathercode`,
@@ -74,17 +86,31 @@ function WidgetDescription({
 
       const { hourly } = resHourly.data
 
+      console.log(city)
+
       // c(hourly)
+      const actualHourInCountry = ActualHourCountry(
+        list[0].dt_txt,
+        city.country
+      )
+
+      const actualHourCode = hourly.weathercode[actualHourInCountry]
 
       onGetHourly({
         country: city.country,
         date: list[0].dt_txt,
         temp: hourly.temperature_2m,
         hour: hourly.time,
-        code: hourly.weathercode
+        code: hourly.weathercode,
+        actualHourCode,
+        sensation: Math.trunc(list[0].main.feels_like),
+        wind:
+          list[0].wind.speed < 1
+            ? list[0].wind.speed
+            : Math.trunc(list[0].wind.speed)
       })
 
-      setDescription(hourly.weathercode[0])
+      setDescription(actualHourCode)
 
       const date = new Date()
       const actualHour = date.getHours()
@@ -102,7 +128,11 @@ function WidgetDescription({
   }
 
   if (error) {
-    return <div className="">Ha ocurrido un error, mis disculpas</div>
+    return (
+      <div className="widget-description-error">
+        Ha ocurrido un error, mis disculpas
+      </div>
+    )
   }
 
   return (
@@ -112,10 +142,11 @@ function WidgetDescription({
       ) : (
         <>
           <div className="widget-info">
-            <div className="widget-info-city">{cityName}</div>
+            <div className="widget-info-city">
+              {innerCityName === '' ? 'Madrid' : innerCityName}
+            </div>
             <div className="widget-info-description">
-              {/* {DescriptionType(description)} */}
-              {typeWeather(description)}
+              {typeWeatherDescription(description)}
             </div>
             <div className="widget-info-temp-container">
               <div className="widget-info-temp">Min {minTemp}º</div>

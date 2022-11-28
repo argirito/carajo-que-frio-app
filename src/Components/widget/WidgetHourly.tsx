@@ -1,8 +1,9 @@
 import './WidgetHour.scss'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { ActualHourCountry, c, countryTimeZone } from '../../utils/Utils'
 import Loader from '../Loader/Loader'
-import { countryTimeZone } from '../../utils/Utils'
+import { isNight } from './Widget'
 
 type hourItem = {
   temp: number[]
@@ -18,9 +19,32 @@ export const getHour = (text: string) => {
   }
 }
 
-export const typeWeather = (code: number) => {
+export const typeWeather = (
+  code: number,
+  date?: string,
+  countryCode?: string
+) => {
+  let d = new Date()
+  let hasCountryCode = false
+
+  if (countryCode && date) {
+    const country = countryTimeZone.getCountry(countryCode)
+    d = new Date(
+      (typeof date === 'string' ? new Date(date) : date).toLocaleString(
+        'en-US',
+        {
+          timeZone: country.timezones[0]
+        }
+      )
+    )
+    hasCountryCode = true
+  }
+
   if ([0, 1].indexOf(code) > -1) {
-    return 'h_sun'
+    if (hasCountryCode) {
+      c('aaaaaaaa')
+    }
+    return isNight(d) ? 'h_moon' : 'h_sun'
   }
   if (code === 2) {
     return 'h_cloud-sun'
@@ -37,7 +61,6 @@ export const typeWeather = (code: number) => {
   if ([95, 96, 99].indexOf(code) > -1) {
     return 'h_storm'
   }
-  console.log(code)
   return 'ERR'
 }
 
@@ -45,24 +68,17 @@ function WidgetHour({ hourly }: { hourly: any }) {
   const [hours, setHours] = useState<hourItem[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [actualHour, setActualHour] = useState(0)
+  const ref = useRef
+
+  c(hours)
 
   useEffect(() => {
     if (hourly?.temp && hourly.temp.length > 0 && hourly.code && hourly.date) {
       const h: any[] = []
 
-      console.log('sssssss', hourly, hourly.code[0])
-      const country = countryTimeZone.getCountry(hourly.country)
+      const hour = ActualHourCountry(hourly.date, hourly.country)
 
-      const dateHour = new Date(
-        (typeof hourly.date === 'string'
-          ? new Date(hourly.date)
-          : hourly.date
-        ).toLocaleString('en-US', {
-          timeZone: country.timezones[0]
-        })
-      )
-
-      setActualHour(dateHour.getHours())
+      setActualHour(hour > 0 ? hour - 1 : hour)
 
       for (let i = 0; i < 48; i++) {
         h.push({
@@ -71,13 +87,11 @@ function WidgetHour({ hourly }: { hourly: any }) {
           code: hourly.code[i]
         })
       }
-
+      c('ASDFD', h)
       setHours(h)
       setIsLoading(false)
     }
   }, [hourly])
-
-  document.onwheel = customScrollFunction
 
   function customScrollFunction(event: any) {
     let deltaY = event.deltaY
@@ -99,7 +113,7 @@ function WidgetHour({ hourly }: { hourly: any }) {
   }
 
   return (
-    <div className="widget-hour" id="scrl1">
+    <div className="widget-hour" id="scrl1" onWheel={customScrollFunction}>
       {isLoading ? (
         <Loader />
       ) : (
@@ -110,9 +124,14 @@ function WidgetHour({ hourly }: { hourly: any }) {
                 <div className="widget-hour-text">
                   {index === 0 ? 'Ahora' : getHour(item.hour)}{' '}
                 </div>
+                {c(typeWeather(item.code, item.date, item.country))}
                 <img
                   className="widget-hour-icon"
-                  src={require(`../../Images/${typeWeather(item.code)}.png`)}
+                  src={require(`../../Images/${typeWeather(
+                    item.code,
+                    item.date,
+                    item.country
+                  )}.png`)}
                   alt=""
                 />
                 <div className="widget-hour-temp">
@@ -126,7 +145,11 @@ function WidgetHour({ hourly }: { hourly: any }) {
                 <div className="widget-hour-text">{getHour(item.hour)} </div>
                 <img
                   className="widget-hour-icon"
-                  src={require(`../../Images/${typeWeather(item.code)}.png`)}
+                  src={require(`../../Images/${typeWeather(
+                    item.code,
+                    item.date,
+                    item.country
+                  )}.png`)}
                   alt=""
                 />
                 <div className="widget-hour-temp">

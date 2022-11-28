@@ -11,7 +11,7 @@ const rainDay =
 const rainNight =
   'https://img.freepik.com/foto-gratis/gotas-lluvia-ventana_1339-7321.jpg?w=2000&t=st=1666988402~exp=1666989002~hmac=c13fda53e6c1055bebd235b5dc8330f1a4eb09aa493f4fdcfacb1084cb9be413'
 const clearDay =
-  'https://img.freepik.com/foto-gratis/nube-cielo-azul_1232-3108.jpg?w=2000&t=st=1666988631~exp=1666989231~hmac=f6d08c1157397ca7602da89d1e5cd22f6a7cc1b72aca2cb2d862da0bf1a469a9'
+  'https://img.freepik.com/foto-gratis/magnifica-vista-carretera-fin-cielo-azul-claro_181624-8968.jpg?w=2000&t=st=1669472288~exp=1669472888~hmac=a5e8e5865eadf39f30ad27e8ca35c616b3cecae24d53ea5b1055a80795636ce7'
 const clearNight =
   'https://img.freepik.com/foto-gratis/hermosa-foto-primer-plano-extremo-media-luna_181624-4157.jpg?w=2000&t=st=1666988698~exp=1666989298~hmac=3c2021da0db14c048f4bf06b2e0ffb100f9249de4e52d6df6391e201ed871f3a'
 const fog =
@@ -27,7 +27,7 @@ const stormNight =
 
 export const typeBackground = (
   code: number,
-  date: string,
+  date: string | Date,
   countryCode: string
 ) => {
   const country = countryTimeZone.getCountry(countryCode)
@@ -53,7 +53,26 @@ export const typeBackground = (
   if ([95, 96, 99].indexOf(code) > -1) {
     return isNight(dateHour) ? stormNight : storm
   }
-  return rainNight
+  return ''
+}
+
+export const ActualHourCountry = (
+  date: string | Date,
+  countryCode: string
+): number => {
+  // local Date transform to specific country hour
+
+  const country = countryTimeZone.getCountry(countryCode)
+
+  const dateHour = new Date(
+    (typeof date === 'string' ? new Date(date) : date).toLocaleString('en-US', {
+      timeZone: country.timezones[0]
+    })
+  )
+
+  const hour = dateHour.getHours()
+
+  return hour === 0 ? hour : hour - 1
 }
 
 export const removeAccents = (str: string) =>

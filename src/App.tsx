@@ -3,19 +3,33 @@ import './App.scss'
 import { useState } from 'react'
 import { connect } from 'react-redux'
 import CitiesColumn from './Components/CitiesColumn/CitiesColumn'
-import Widget, { isNight } from './Components/widget/Widget'
+import CreditsLabel from './Components/Credits/CreditsLabel'
+import Widget, { WidgetSize } from './Components/widget/Widget'
 import WidgetDescription from './Components/widget/WidgetDescription'
-import WidgetHour from './Components/widget/WidgetHourly'
 import WidgetForecast from './Components/widget/WidgetForecast'
+import WidgetHour from './Components/widget/WidgetHourly'
 import { typeBackground } from './utils/Utils'
 
-type HourlyData = { code: number[]; hour: Date[]; temp: number[] }
+type HourlyData = {
+  actualHourCode: number
+  country: string
+  date: string
+  sensation: number
+  wind: number
+  code: number[]
+  hour: Date[]
+  temp: number[]
+}
 
-function App(state: any) {
-  const [lat, setLat] = useState(0)
-  const [lon, setLon] = useState(0)
-  const [hourly, setHourly] = useState<any>()
-  const [cities, setCities] = useState<any[]>([])
+function App() {
+  const [hourly, setHourly] = useState<HourlyData>()
+  const [cityDetails, setCityDetails] = useState({
+    lat: 0,
+    lon: 0,
+    city: ''
+  })
+
+  console.log(hourly)
 
   return (
     <div className="App">
@@ -23,45 +37,57 @@ function App(state: any) {
         className="App-body-container"
         style={{
           backgroundImage: `url(${typeBackground(
-            hourly?.code[0] ?? 0,
+            hourly?.actualHourCode ?? -1,
             hourly?.date ?? new Date(),
             hourly?.country ?? 'ES'
           )})`
-          // 'url(https://img.freepik.com/foto-gratis/gotas-lluvia-ventana_1339-7321.jpg?w=2000&t=st=1666988402~exp=1666989002~hmac=c13fda53e6c1055bebd235b5dc8330f1a4eb09aa493f4fdcfacb1084cb9be413)'
-          // 'url(https://img.freepik.com/foto-gratis/lluvia-fuera-ventanas-villa_1321-908.jpg?w=2000&t=st=1666987282~exp=1666987882~hmac=ca54619c2b1d7c78a25d5fd0520ff08a2e3a40cbad6326616734721e6bcce631)'
-          // 'url(https://pikwizard.com/photos/sky-clouds-cloud--e64049d0bcbd344f58218af50c4aac56-m.jpg)'
         }}
       >
-        {/* <div className="">
-        <h2>{state.state}</h2>
-        <h2>{state.state}</h2>
-        <button onClick={() => store.dispatch({ type: 'INCREMENT' })}>+</button>
-        <button onClick={() => store.dispatch({ type: 'DECREMENT' })}>-</button>
-        <button onClick={() => store.dispatch({ type: 'RESET' })}>reset</button>
-      </div> */}
         <div className="App-body">
           <div className="app-first-column">
             <CitiesColumn
-              onSelectCity={(lat: number, lon: number) => {
-                setLat(lat)
-                setLon(lon)
+              onSelectCity={(lat: number, lon: number, city: string) => {
+                setCityDetails({ lat, lon, city })
               }}
             />
           </div>
           <div className="app-second-column">
             <Widget>
               <WidgetDescription
-                lat={lat}
-                lon={lon}
-                onGetHourly={(data: any) => setHourly(data)}
+                lat={cityDetails.lat}
+                lon={cityDetails.lon}
+                cityName={cityDetails.city}
+                onGetHourly={setHourly}
               />
             </Widget>
+            <CreditsLabel
+              title="OpenWeatherMap"
+              link="https://openweathermap.org/"
+            />
+            <div className="app-small-widgets">
+              {hourly && hourly.sensation && (
+                <Widget title="Sensación" size={WidgetSize.Small} iconText="🌡">
+                  <div className="app-sensation-weather">
+                    {hourly.sensation}º
+                  </div>
+                </Widget>
+              )}
+              {hourly && hourly.wind && (
+                <Widget title="Viento" size={WidgetSize.Small} iconText="🍃">
+                  <div className="app-wind-weather-container">
+                    <div className="app-wind-weather">{hourly.wind}</div>
+                    <div className="app-wind-weather-text">km/h</div>
+                  </div>
+                </Widget>
+              )}
+            </div>
             <Widget title="Previsión por horas (48h)">
               <WidgetHour hourly={hourly} />
             </Widget>
             <Widget title="Previsión por días (7 días)">
               <WidgetForecast hourly={hourly} />
             </Widget>
+            <CreditsLabel title="OpenMeteo" link="https://open-meteo.com" />
           </div>
         </div>
       </div>

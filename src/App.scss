@@ -5,16 +5,17 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-color: black;
+  background-color: white;
+  margin-top: 5rem;
 }
 
 .App-body-container {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  @include size(90rem, 82rem);
+  // @include size(90rem, 82rem);
+  @include size(77rem, 95rem);
   border-radius: 12px;
-  // margin: 20rem;
 
   &::after {
     content: '';
@@ -23,9 +24,51 @@
     height: 100%;
     top: 0;
     left: 0;
-    background-color: rgba(black, 0.2);
     border-radius: 12px;
   }
+}
+
+.app-sensation-weather {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 0.4rem 0;
+  color: white;
+  font-size: 7rem;
+  @include webfont('semibold');
+}
+
+.app-wind-weather-container {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 4px;
+  height: 100%;
+}
+.app-wind-weather-text {
+  color: white;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  margin-right: 1rem;
+}
+
+.app-wind-weather {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  font-size: 5rem;
+  margin-left: 1.4rem;
+  color: white;
+  @include webfont('semibold');
+}
+
+.app-small-widgets {
+  display: flex;
+  justify-content: space-between;
+}
+
+.app-first-column {
+  width: 30rem;
 }
 
 .App-body {
