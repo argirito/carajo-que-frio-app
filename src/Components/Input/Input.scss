@@ -7,7 +7,6 @@
 
   input {
     border: 1px solid transparent;
-    // border: 1px solid $text-color;
     @include size(100%, 4rem);
     border-radius: 4px;
     background-color: rgba(white, 0.3);
@@ -19,15 +18,22 @@
     &:focus {
       outline: none;
       background-color: rgba(white, 0.2);
-      // border-color: rgba($teal, 0.4);
-      // background-color: #f6f7f9;
       @include transition(border-color 0.24s, background-color 0.24s);
     }
-    &::placeholder,
-    &:-ms-input-placeholder,
-    &::-ms-input-placeholder {
-      color: white;
-      opacity: 1;
+    &::placeholder {
+      /* Chrome, Firefox, Opera, Safari 10.1+ */
+      color: rgba(white, 0.6);
+      opacity: 1; /* Firefox */
+    }
+
+    :-ms-input-placeholder {
+      /* Internet Explorer 10-11 */
+      color: rgba(white, 0.6);
+    }
+
+    ::-ms-input-placeholder {
+      /* Microsoft Edge */
+      color: rgba(white, 0.6);
     }
   }
 }

@@ -30,6 +30,7 @@ function CitiesColumn({
       getAmadeusCities(text)
         .then((data: any) => {
           console.log(data)
+
           setCities(
             data.map((item: any) => ({
               name: item.name,
@@ -38,14 +39,18 @@ function CitiesColumn({
               lon: item.geoCode.longitude
             }))
           )
-          setWrongName(false)
+          if (data.length === 0) {
+            setWrongName(true)
+          } else {
+            setWrongName(false)
+          }
         })
         .catch(() => setWrongName(true))
     }
   }
 
   useEffect(() => {
-    if (input === '') {
+    if (input === '' || cities.length > 0) {
       setCities([])
       setWrongName(false)
     }
@@ -86,32 +91,37 @@ function CitiesColumn({
         </Button>
       </div>
       <CreditsLabel title="Amadeus" link="https://amadeus.com" />
-
-      <div className="city-map">
-        {!wrongName &&
-          cities.length > 0 &&
-          cities.map((city: any, index: number) => (
-            <div
-              key={index}
-              className="city-item"
-              onClick={() => citySelected(city.lat, city.lon, city.name)}
-            >
-              <div className="city-item__text">{city.name}</div>
-              <div className="city-item__country">
-                - {region.of(city.countryCode)}
+      <div className="city-map-container">
+        {cities.length > 0 && (
+          <div className="city-map">
+            {!wrongName &&
+              cities.length > 0 &&
+              cities.map((city: any, index: number) => (
+                <div
+                  key={index}
+                  className="city-item"
+                  onClick={() => citySelected(city.lat, city.lon, city.name)}
+                >
+                  <div className="city-item__text">{city.name}</div>
+                  <div className="city-item__country">
+                    - {region.of(city.countryCode)}
+                  </div>
+                </div>
+              ))}
+          </div>
+        )}
+        {wrongName && input !== '' && cities.length === 0 && (
+          <div className="city-map">
+            <div className="city-not-found">
+              <div className="city-not-found-text">
+                Ciudad no encontrada mi hermano
               </div>
+              <img
+                className="city-not-found-image"
+                src={require(`../../Images/not_city.png`)}
+                alt=""
+              />
             </div>
-          ))}
-        {wrongName && input !== '' && (
-          <div className="city-not-found">
-            <div className="city-not-found-text">
-              Ciudad no encontrada mi hermano
-            </div>
-            <img
-              className="city-not-found-image"
-              src={require(`../../Images/not_city.png`)}
-              alt=""
-            />
           </div>
         )}
       </div>

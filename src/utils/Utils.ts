@@ -1,5 +1,3 @@
-import { isNight } from '../Components/widget/Widget'
-
 export const countryTimeZone = require('countries-and-timezones')
 
 const cloudly =
@@ -56,13 +54,38 @@ export const typeBackground = (
   return ''
 }
 
-export const ActualHourCountry = (
-  date: string | Date,
-  countryCode: string
-): number => {
+export const isNight = (d?: Date): boolean => {
+  let date = new Date()
+
+  if (d) {
+    date = d
+  }
+
+  const actualMonth = date.getMonth()
+  const summerTime = actualMonth >= 5 && actualMonth <= 9
+
+  const actualHour = date.getHours()
+
+  if (actualHour >= 0 && actualHour < 7) {
+    return true
+  }
+  if (!summerTime) {
+    if (actualHour >= 19 && actualHour <= 23) {
+      return true
+    }
+  } else {
+    if (actualHour >= 21 && actualHour <= 23) {
+      return true
+    }
+  }
+}
+
+export const ActualHourCountry = (countryCode: string): number => {
   // local Date transform to specific country hour
 
   const country = countryTimeZone.getCountry(countryCode)
+
+  const date = new Date()
 
   const dateHour = new Date(
     (typeof date === 'string' ? new Date(date) : date).toLocaleString('en-US', {
@@ -72,7 +95,7 @@ export const ActualHourCountry = (
 
   const hour = dateHour.getHours()
 
-  return hour === 0 ? hour : hour - 1
+  return hour === 0 ? hour : hour
 }
 
 export const removeAccents = (str: string) =>

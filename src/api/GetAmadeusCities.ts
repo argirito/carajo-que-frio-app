@@ -1,6 +1,24 @@
 import axios from 'axios'
 import { removeAccents } from '../utils/Utils'
 
+function CleanResults(data: any) {
+  const without = data
+    .filter((item: any) => item.address.countryCode !== 'US')
+    .filter((item: any) => item.address.countryCode !== 'GB')
+
+  const withEEUU = data.filter((item: any) => item.address.countryCode === 'US')
+  const withGB = data.filter((item: any) => item.address.countryCode === 'GB')
+
+  if (withEEUU.length > 0) {
+    without.push(withEEUU[0])
+  }
+  if (withGB.length > 0) {
+    without.push(withGB[0])
+  }
+
+  return without
+}
+
 export const getAmadeusCities = (text: string): Promise<any> =>
   new Promise(async (resolve, reject) => {
     try {
@@ -31,8 +49,7 @@ export const getAmadeusCities = (text: string): Promise<any> =>
         ({ name }: any) =>
           removeAccents(name.toLowerCase()) === textWithoutFormat
       )
-
-      resolve(filtered)
+      resolve(CleanResults(filtered))
     } catch (error: any) {
       reject(false)
     }

@@ -12,8 +12,16 @@
   background-size: cover;
   backdrop-filter: blur(4px);
 
+  @include media-mix() {
+    width: 35rem;
+  }
+
   &.small {
-    @include size(18rem, auto);
+    @include size(18rem, 13.1rem);
+
+    @include media-mix() {
+      width: 16rem;
+    }
   }
 
   &::after {

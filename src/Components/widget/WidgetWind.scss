@@ -1,0 +1,37 @@
+@import '../../styles/base';
+
+.widget-wind {
+  height: 100%;
+}
+
+.app-wind-weather-container {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 4px;
+  height: 100%;
+}
+.app-wind-weather-text {
+  color: white;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  margin-right: 1rem;
+
+  @include media-mix() {
+    margin-bottom: 2.5rem;
+  }
+}
+
+.app-wind-weather {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  font-size: 5rem;
+  margin-left: 1.4rem;
+  color: white;
+  @include webfont('semibold');
+
+  @include media-mix() {
+    font-size: 4rem;
+  }
+}

@@ -2,6 +2,10 @@
 
 .cities-column-container {
   margin: 2rem;
+
+  @include media-mix() {
+    margin-bottom: 0;
+  }
 }
 
 .cities-column-input {
@@ -9,10 +13,18 @@
   display: row;
   align-items: center;
   grid-gap: 1rem;
+
+  @include media-mix() {
+    margin-right: 0.4rem;
+  }
 }
 .input-cities {
   width: 200px;
   height: 4rem;
+
+  @include media-mix() {
+    width: 29rem;
+  }
 }
 .button-cities {
   width: 5rem;
@@ -37,9 +49,24 @@
   }
 }
 
+.city-map-container {
+  position: relative;
+}
+
 .city-map {
-  height: 80rem;
+  position: absolute;
+  top: -14px;
+  padding: 4px 0;
+  width: 100%;
+  z-index: 4;
   overflow: auto;
+
+  @media (max-width: 670px) {
+    background-color: rgba(black, 0.1);
+    backdrop-filter: blur(8px);
+    border-radius: 0px 8px 8px 8px;
+    width: calc(100% - 8px);
+  }
 }
 
 .city-item {
@@ -47,13 +74,18 @@
   color: white;
   @include webfont('medium');
   cursor: pointer;
-
   &:hover {
     text-shadow: 1px 1px 10px rgba(white, 0.7);
+  }
+  @media (max-width: 670px) {
+    margin-left: 8px;
   }
 }
 
 .city-not-found {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin: 2rem;
 }
 

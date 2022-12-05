@@ -7,15 +7,25 @@
   height: 100vh;
   background-color: white;
   margin-top: 5rem;
+
+  @include media-mix() {
+    align-items: unset;
+    height: 108vh;
+    margin-top: 0;
+  }
 }
 
 .App-body-container {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  // @include size(90rem, 82rem);
   @include size(77rem, 95rem);
   border-radius: 12px;
+
+  @include media-mix() {
+    height: 102rem;
+    border-radius: 0;
+  }
 
   &::after {
     content: '';
@@ -28,47 +38,21 @@
   }
 }
 
-.app-sensation-weather {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  margin: 0.4rem 0;
-  color: white;
-  font-size: 7rem;
-  @include webfont('semibold');
-}
-
-.app-wind-weather-container {
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  gap: 4px;
-  height: 100%;
-}
-.app-wind-weather-text {
-  color: white;
-  font-size: 2rem;
-  margin-bottom: 2rem;
-  margin-right: 1rem;
-}
-
-.app-wind-weather {
-  display: flex;
-  align-items: center;
-  height: 100%;
-  font-size: 5rem;
-  margin-left: 1.4rem;
-  color: white;
-  @include webfont('semibold');
-}
-
 .app-small-widgets {
   display: flex;
   justify-content: space-between;
+
+  @include media-mix() {
+    width: 35rem;
+  }
 }
 
 .app-first-column {
   width: 30rem;
+
+  @include media-mix() {
+    width: 100%;
+  }
 }
 
 .App-body {
@@ -76,6 +60,10 @@
   z-index: 4;
   display: flex;
   flex-direction: row;
+
+  @media (max-width: 670px) {
+    flex-direction: column;
+  }
 }
 
 .App-logo {
@@ -112,4 +100,14 @@
 
 .app-second-column {
   margin-left: 2rem;
+}
+
+.widget-error-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @include size(100%);
+  margin: 2rem 0;
+  color: white;
+  font-size: 2rem;
 }

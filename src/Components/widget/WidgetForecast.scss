@@ -1,9 +1,12 @@
 @import '../../styles/base';
 
+.widget-forecast-container {
+  height: 30rem;
+}
+
 .inner-widget-forecast {
   display: flex;
   flex-direction: column;
-  height: auto;
   padding: 1.6rem;
 }
 
@@ -16,6 +19,7 @@
 
 .widget-forecast-icon {
   @include size(auto, 2rem);
+  max-width: 2.4rem;
 }
 
 .widget-forecast-text,
@@ -39,7 +43,6 @@
 
   &.h_sun {
     background-color: rgb(255, 221, 29);
-    // background-color: rgb(225, 192, 5);
   }
   &.h_rain {
     background-color: rgb(0, 153, 235);
@@ -47,6 +50,5 @@
   }
   &.h_storm {
     background-color: rgb(103, 103, 103);
-    // background-color: rgb(75, 75, 75);
   }
 }

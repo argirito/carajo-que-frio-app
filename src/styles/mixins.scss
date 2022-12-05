@@ -1,19 +1,19 @@
 $font-weights: (
   light: (
-    weight: 300,
+    weight: 300
   ),
   regular: (
-    weight: 400,
+    weight: 400
   ),
   medium: (
-    weight: 500,
+    weight: 500
   ),
   semibold: (
-    weight: 700,
+    weight: 700
   ),
   bold: (
-    weight: 800,
-  ),
+    weight: 800
+  )
 );
 
 @mixin size($width, $height: $width) {
@@ -21,9 +21,9 @@ $font-weights: (
   height: $height;
 }
 
-@mixin webfont($name: "regular") {
+@mixin webfont($name: 'regular') {
   $font-params: map-get($font-weights, $name);
-  $font-weight: map-get($font-params, "weight");
+  $font-weight: map-get($font-params, 'weight');
   font-weight: $font-weight;
 }
 
@@ -32,4 +32,10 @@ $font-weights: (
   -o-transition: $transition;
   -webkit-transition: $transition;
   transition: $transition;
+}
+
+@mixin media-mix() {
+  @media (max-width: 670px) {
+    @content;
+  }
 }

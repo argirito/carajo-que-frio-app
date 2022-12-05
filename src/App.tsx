@@ -8,9 +8,11 @@ import Widget, { WidgetSize } from './Components/widget/Widget'
 import WidgetDescription from './Components/widget/WidgetDescription'
 import WidgetForecast from './Components/widget/WidgetForecast'
 import WidgetHour from './Components/widget/WidgetHourly'
+import WidgetSensation from './Components/widget/WidgetSensation'
+import WidgetWind from './Components/widget/WidgetWind'
 import { typeBackground } from './utils/Utils'
 
-type HourlyData = {
+export type HourlyData = {
   actualHourCode: number
   country: string
   date: string
@@ -28,8 +30,6 @@ function App() {
     lon: 0,
     city: ''
   })
-
-  console.log(hourly)
 
   return (
     <div className="App">
@@ -65,25 +65,21 @@ function App() {
               link="https://openweathermap.org/"
             />
             <div className="app-small-widgets">
-              {hourly && hourly.sensation && (
+              {hourly && (
                 <Widget title="Sensación" size={WidgetSize.Small} iconText="🌡">
-                  <div className="app-sensation-weather">
-                    {hourly.sensation}º
-                  </div>
+                  <WidgetSensation hourly={hourly} />
                 </Widget>
               )}
-              {hourly && hourly.wind && (
+              {hourly && (
                 <Widget title="Viento" size={WidgetSize.Small} iconText="🍃">
-                  <div className="app-wind-weather-container">
-                    <div className="app-wind-weather">{hourly.wind}</div>
-                    <div className="app-wind-weather-text">km/h</div>
-                  </div>
+                  <WidgetWind hourly={hourly} />
                 </Widget>
               )}
             </div>
-            <Widget title="Previsión por horas (48h)">
+            <Widget title="Previsión de hoy y mañana">
               <WidgetHour hourly={hourly} />
             </Widget>
+            <CreditsLabel title="Flaticon" link="https://www.flaticon.com" />
             <Widget title="Previsión por días (7 días)">
               <WidgetForecast hourly={hourly} />
             </Widget>

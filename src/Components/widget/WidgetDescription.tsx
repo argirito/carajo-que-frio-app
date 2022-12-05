@@ -75,10 +75,6 @@ function WidgetDescription({
 
       const { city, list } = res.data
 
-      console.log(res.data)
-
-      // setDescription(list[0].weather[0].main)
-
       const resHourly = await axios({
         url: `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=temperature_2m,weathercode`,
         method: 'GET'
@@ -86,15 +82,9 @@ function WidgetDescription({
 
       const { hourly } = resHourly.data
 
-      console.log(city)
+      const actualHourInCountry = ActualHourCountry(city.country)
 
-      // c(hourly)
-      const actualHourInCountry = ActualHourCountry(
-        list[0].dt_txt,
-        city.country
-      )
-
-      const actualHourCode = hourly.weathercode[actualHourInCountry]
+      const actualHourCode = hourly.weathercode[actualHourInCountry + 1]
 
       onGetHourly({
         country: city.country,
@@ -127,33 +117,35 @@ function WidgetDescription({
     }
   }
 
-  if (error) {
-    return (
-      <div className="widget-description-error">
-        Ha ocurrido un error, mis disculpas
-      </div>
-    )
-  }
-
   return (
     <div className="widget-description">
-      {isLoading ? (
-        <Loader />
+      {error ? (
+        <div className="widget-error-text">
+          Ha ocurrido un error, mis disculpas
+        </div>
       ) : (
         <>
-          <div className="widget-info">
-            <div className="widget-info-city">
-              {innerCityName === '' ? 'Madrid' : innerCityName}
-            </div>
-            <div className="widget-info-description">
-              {typeWeatherDescription(description)}
-            </div>
-            <div className="widget-info-temp-container">
-              <div className="widget-info-temp">Min {minTemp}º</div>
-              <div className="widget-info-temp">Max {maxTemp}º</div>
-            </div>
-          </div>
-          <div className="widget-info-actual">{Math.trunc(actualTemp)}º</div>
+          {isLoading ? (
+            <Loader />
+          ) : (
+            <>
+              <div className="widget-info">
+                <div className="widget-info-city">
+                  {innerCityName === '' ? 'Madrid' : innerCityName}
+                </div>
+                <div className="widget-info-description">
+                  {typeWeatherDescription(description)}
+                </div>
+                <div className="widget-info-temp-container">
+                  <div className="widget-info-temp">Min {minTemp}º</div>
+                  <div className="widget-info-temp">Max {maxTemp}º</div>
+                </div>
+              </div>
+              <div className="widget-info-actual">
+                {Math.trunc(actualTemp)}º
+              </div>
+            </>
+          )}
         </>
       )}
     </div>

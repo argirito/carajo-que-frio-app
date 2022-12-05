@@ -1,14 +1,5 @@
 import './Widget.scss'
 
-export const isNight = (d?: Date): boolean => {
-  let date = new Date()
-
-  if (d) {
-    date = d
-  }
-  return date.getHours() >= 21 || date.getHours() <= 6
-}
-
 export enum WidgetSize {
   Small = 'small',
   Normal = 'normal'
