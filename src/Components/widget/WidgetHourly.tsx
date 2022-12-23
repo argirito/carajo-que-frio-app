@@ -2,7 +2,14 @@ import './WidgetHour.scss'
 
 import { useEffect, useState } from 'react'
 import { HourlyData } from '../../App'
-import { ActualHourCountry, isNight } from '../../utils/Utils'
+import {
+  ActualHourCountry,
+  isFog,
+  isNight,
+  isRain,
+  isSnow,
+  isStorm
+} from '../../utils/Utils'
 import Loader from '../Loader/Loader'
 
 type hourItem = {
@@ -42,16 +49,16 @@ const typeWeatherHourly = (
   if (code === 3) {
     return 'h_cloud'
   }
-  if ([45, 48].indexOf(code) > -1) {
+  if (isFog(code)) {
     return 'h_fog'
   }
-  if ([51, 53, 55, 60, 61, 62, 63, 80, 81, 82].indexOf(code) > -1) {
+  if (isRain(code)) {
     return 'h_rain'
   }
-  if ([71, 73, 75, 77].indexOf(code) > -1) {
+  if (isSnow(code)) {
     return 'h_snow'
   }
-  if ([95, 96, 99].indexOf(code) > -1) {
+  if (isStorm(code)) {
     return 'h_storm'
   }
   return 'ERR'

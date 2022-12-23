@@ -1,5 +1,21 @@
 export const countryTimeZone = require('countries-and-timezones')
 
+export const isFog = (code: number) => {
+  return [45, 48].indexOf(code) > -1
+}
+
+export const isRain = (code: number) => {
+  return [51, 53, 55, 60, 61, 62, 63, 66, 67, 80, 81, 82].indexOf(code) > -1
+}
+
+export const isSnow = (code: number) => {
+  return [71, 73, 75, 77].indexOf(code) > -1
+}
+
+export const isStorm = (code: number) => {
+  return [95, 96, 99].indexOf(code) > -1
+}
+
 const cloudly =
   'https://pikwizard.com/photos/sky-clouds-cloud--e64049d0bcbd344f58218af50c4aac56-m.jpg'
 const cloudlyNight =
@@ -13,15 +29,22 @@ const clearDay =
 const clearNight =
   'https://img.freepik.com/foto-gratis/hermosa-foto-primer-plano-extremo-media-luna_181624-4157.jpg?w=2000&t=st=1666988698~exp=1666989298~hmac=3c2021da0db14c048f4bf06b2e0ffb100f9249de4e52d6df6391e201ed871f3a'
 const fog =
-  'https://img.freepik.com/foto-gratis/arboles-al-lado-otro-bosque-cubiertos-niebla-que-arrastra_181624-16397.jpg?w=2000&t=st=1666992163~exp=1666992763~hmac=cf4a90c60c0ffdf8aab95b11ceb2b1a67b07364c413a4669a9c29b624da29ef7'
+  'https://img.freepik.com/fotos-premium/carretera-escenica-grandes-arboles-niebla-mistica-niebla-dia-otono_379823-3801.jpg?w=2000'
+// 'https://img.freepik.com/foto-gratis/arboles-al-lado-otro-bosque-cubiertos-niebla-que-arrastra_181624-16397.jpg?w=2000&t=st=1666992163~exp=1666992763~hmac=cf4a90c60c0ffdf8aab95b11ceb2b1a67b07364c413a4669a9c29b624da29ef7'
 const fogNight =
-  'https://www.freepik.es/fotos-premium/luna-llena-sobre-nubes-niebla-cielo-nocturno-nebuloso-paisaje-borroso_33703365.htm#query=fog%20night&position=5&from_view=search&track=sph'
+  'https://img.freepik.com/fotos-premium/siluetas-arboles-oscuros-bosque-espeluznante-niebla-nocturna-resplandor-misterioso-ilustracion-digital-3d_124717-1601.jpg?w=2000'
+// 'https://img.freepik.com/fotos-premium/luna-llena-sobre-nubes-niebla-cielo-nocturno-nebuloso-paisaje-borroso_284753-2035.jpg?w=2000'
 
 const storm =
   'https://img.freepik.com/fotos-premium/supercell-tormenta-tormenta-tornado-advertencia-tiempo-concepto_492154-1421.jpg?w=2000'
 
 const stormNight =
   'https://img.freepik.com/foto-gratis/nubes-tormenta-relampagos-noche_335224-937.jpg?w=2000&t=st=1666992481~exp=1666993081~hmac=26b0340d37e91d532ba6e143df52b68e88759afd78e9f02554858ae908fa0f0f'
+
+const snow =
+  'https://img.freepik.com/foto-gratis/paisaje-carretera-selva-negra-cubierta-arboles-nieve-alemania_181624-54214.jpg?w=2000&t=st=1671226661~exp=1671227261~hmac=3a4300d4b4508a02e1b44d16000b7fb952fb31eb039f69a3bc69ae7b3123078f'
+const snowNight =
+  'https://img.freepik.com/foto-gratis/hermosa-foto-montana-cubierta-nieve-noche_181624-4160.jpg?w=2000&t=st=1671226715~exp=1671227315~hmac=07e2509ab232069dbb0679992c1ee72ae66ba5d0736e630ead3e9b5bb7b09f51'
 
 export const typeBackground = (
   code: number,
@@ -42,14 +65,17 @@ export const typeBackground = (
   if ([2, 3].indexOf(code) > -1) {
     return isNight(dateHour) ? cloudlyNight : cloudly
   }
-  if ([45, 48].indexOf(code) > -1) {
+  if (isFog(code)) {
     return isNight(dateHour) ? fogNight : fog
   }
-  if ([60, 61, 62, 63, 80, 81, 82].indexOf(code) > -1) {
+  if (isRain(code)) {
     return isNight(dateHour) ? rainNight : rainDay
   }
-  if ([95, 96, 99].indexOf(code) > -1) {
+  if (isStorm(code)) {
     return isNight(dateHour) ? stormNight : storm
+  }
+  if (isSnow(code)) {
+    return isNight(dateHour) ? snowNight : snow
   }
   return ''
 }

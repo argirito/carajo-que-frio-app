@@ -12,7 +12,7 @@
   display: flex;
   display: row;
   align-items: center;
-  grid-gap: 1rem;
+  gap: 0.8rem;
 
   @include media-mix() {
     margin-right: 0.4rem;
@@ -23,7 +23,8 @@
   height: 4rem;
 
   @include media-mix() {
-    width: 29rem;
+    width: 80%;
+    max-width: 30rem;
   }
 }
 .button-cities {
@@ -86,7 +87,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 2rem;
+  margin-top: 2.4rem;
 }
 
 .city-not-found-text {
@@ -94,6 +95,12 @@
   color: white;
   font-size: 1.8rem;
   @include webfont('medium');
+
+  &.extra {
+    margin-top: 0.8rem;
+    font-size: 1rem;
+    opacity: 0.8;
+  }
 }
 
 .city-not-found-image {

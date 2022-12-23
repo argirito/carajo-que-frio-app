@@ -1,6 +1,7 @@
 {
   "name": "classic-weather-app",
   "version": "0.1.0",
+  "homepage": "https://argirito.github.io/carajo-que-frio",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
@@ -19,6 +20,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -b main -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -44,6 +47,7 @@
   },
   "devDependencies": {
     "css-loader": "^6.7.1",
+    "gh-pages": "^4.0.0",
     "husky": "^8.0.1",
     "mini-css-extract-plugin": "^2.6.1",
     "redux-devtools-extension": "^2.13.9",

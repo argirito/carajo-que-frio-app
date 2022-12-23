@@ -116,6 +116,9 @@ function CitiesColumn({
               <div className="city-not-found-text">
                 Ciudad no encontrada mi hermano
               </div>
+              <div className="city-not-found-text extra">
+                (Algunas ciudades deben ser escritas en inglés)
+              </div>
               <img
                 className="city-not-found-image"
                 src={require(`../../Images/not_city.png`)}

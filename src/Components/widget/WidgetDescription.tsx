@@ -2,7 +2,7 @@ import './WidgetDescription.scss'
 
 import axios from 'axios'
 import { useEffect, useState } from 'react'
-import { ActualHourCountry } from '../../utils/Utils'
+import { ActualHourCountry, isFog, isRain, isStorm } from '../../utils/Utils'
 import Loader from '../Loader/Loader'
 
 const typeWeatherDescription = (code: number) => {
@@ -12,13 +12,13 @@ const typeWeatherDescription = (code: number) => {
   if ([2, 3].indexOf(code) > -1) {
     return 'Un poco nublado no te voy a mentir.'
   }
-  if ([45, 48].indexOf(code) > -1) {
-    return 'Niebla pero no mucha'
+  if (isFog(code)) {
+    return 'Niebla de película de terror'
   }
-  if ([60, 61, 62, 63, 80, 81, 82].indexOf(code) > -1) {
+  if (isRain(code)) {
     return 'Lluvia pa refrescar el ambiente.'
   }
-  if ([95, 96, 99].indexOf(code) > -1) {
+  if (isStorm(code)) {
     return 'Una tormenta importante'
   }
   return 'ERR'
@@ -84,7 +84,7 @@ function WidgetDescription({
 
       const actualHourInCountry = ActualHourCountry(city.country)
 
-      const actualHourCode = hourly.weathercode[actualHourInCountry + 1]
+      const actualHourCode = hourly.weathercode[actualHourInCountry]
 
       onGetHourly({
         country: city.country,

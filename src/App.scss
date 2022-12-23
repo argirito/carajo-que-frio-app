@@ -4,13 +4,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
-  background-color: white;
   margin-top: 5rem;
 
   @include media-mix() {
     align-items: unset;
-    height: 108vh;
     margin-top: 0;
   }
 }
@@ -25,16 +22,6 @@
   @include media-mix() {
     height: 102rem;
     border-radius: 0;
-  }
-
-  &::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    border-radius: 12px;
   }
 }
 
@@ -56,8 +43,6 @@
 }
 
 .App-body {
-  position: relative;
-  z-index: 4;
   display: flex;
   flex-direction: row;
 
@@ -100,6 +85,10 @@
 
 .app-second-column {
   margin-left: 2rem;
+
+  @include media-mix() {
+    margin-right: 1rem;
+  }
 }
 
 .widget-error-text {
