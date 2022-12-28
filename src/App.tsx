@@ -31,8 +31,6 @@ function App() {
     city: ''
   })
 
-  c(hourly)
-
   return (
     <div className="App">
       <div
