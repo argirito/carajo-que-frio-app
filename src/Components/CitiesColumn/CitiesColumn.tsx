@@ -29,8 +29,6 @@ function CitiesColumn({
     if (text !== '') {
       getAmadeusCities(text)
         .then((data: any) => {
-          console.log(data)
-
           setCities(
             data.map((item: any) => ({
               name: item.name,
@@ -82,6 +80,7 @@ function CitiesColumn({
             onChange: (event: any) => setInput(event.currentTarget.value),
             onKeyDown: (event: any) => pressEnter(event, input)
           }}
+          onClear={() => setInput('')}
         />
         <Button
           className={`button-cities ${input === '' ? 'disabled' : ''} `}

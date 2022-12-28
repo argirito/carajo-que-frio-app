@@ -46,6 +46,7 @@ function WidgetDescription({
   useEffect(() => {
     if (lat !== 0) {
       clima(lat, lon)
+      setError(false)
     } else {
       if (localStorage.getItem('cityDetails')) {
         const storageLat = JSON.parse(localStorage.getItem('cityDetails')).lat
@@ -112,6 +113,16 @@ function WidgetDescription({
     } catch (error: any) {
       console.log(error)
       setError(true)
+      onGetHourly({
+        country: null,
+        date: '',
+        temp: [],
+        hour: [],
+        code: [],
+        actualHourCode: null,
+        sensation: null,
+        wind: null
+      })
     } finally {
       setIsLoading(false)
     }

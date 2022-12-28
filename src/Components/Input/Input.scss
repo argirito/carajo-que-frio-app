@@ -3,6 +3,7 @@
 .input {
   display: flex;
   flex-direction: column;
+  position: relative;
   color: white;
 
   input {
@@ -34,6 +35,18 @@
     ::-ms-input-placeholder {
       /* Microsoft Edge */
       color: rgba(white, 0.6);
+    }
+  }
+
+  .input-clear__container {
+    position: absolute;
+    right: 8px;
+    cursor: pointer;
+    top: 11px;
+    opacity: 0.6;
+
+    .remixicon-icon {
+      @include size(1.8rem);
     }
   }
 }

@@ -77,7 +77,7 @@ export const typeBackground = (
   if (isSnow(code)) {
     return isNight(dateHour) ? snowNight : snow
   }
-  return ''
+  return clearNight
 }
 
 export const isNight = (d?: Date): boolean => {

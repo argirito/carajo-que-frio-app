@@ -10,7 +10,7 @@ import WidgetForecast from './Components/widget/WidgetForecast'
 import WidgetHour from './Components/widget/WidgetHourly'
 import WidgetSensation from './Components/widget/WidgetSensation'
 import WidgetWind from './Components/widget/WidgetWind'
-import { typeBackground } from './utils/Utils'
+import { c, typeBackground } from './utils/Utils'
 
 export type HourlyData = {
   actualHourCode: number
@@ -30,6 +30,8 @@ function App() {
     lon: 0,
     city: ''
   })
+
+  c(hourly)
 
   return (
     <div className="App">
@@ -60,30 +62,43 @@ function App() {
                 onGetHourly={setHourly}
               />
             </Widget>
-            <CreditsLabel
-              title="OpenWeatherMap"
-              link="https://openweathermap.org/"
-            />
+            {hourly && hourly.sensation && (
+              <CreditsLabel
+                title="OpenWeatherMap"
+                link="https://openweathermap.org/"
+              />
+            )}
             <div className="app-small-widgets">
-              {hourly && (
+              {hourly && hourly.sensation !== undefined && (
                 <Widget title="Sensación" size={WidgetSize.Small} iconText="🌡">
                   <WidgetSensation hourly={hourly} />
                 </Widget>
               )}
-              {hourly && (
+              {hourly && hourly.wind && (
                 <Widget title="Viento" size={WidgetSize.Small} iconText="🍃">
                   <WidgetWind hourly={hourly} />
                 </Widget>
               )}
             </div>
-            <Widget title="Previsión de hoy y mañana">
-              <WidgetHour hourly={hourly} />
-            </Widget>
-            <CreditsLabel title="Flaticon" link="https://www.flaticon.com" />
-            <Widget title="Previsión por días (7 días)">
-              <WidgetForecast hourly={hourly} />
-            </Widget>
-            <CreditsLabel title="OpenMeteo" link="https://open-meteo.com" />
+            {hourly && hourly.temp?.length > 0 && (
+              <>
+                <Widget title="Previsión de hoy y mañana">
+                  <WidgetHour hourly={hourly} />
+                </Widget>
+                <CreditsLabel
+                  title="Flaticon"
+                  link="https://www.flaticon.com"
+                />
+              </>
+            )}
+            {hourly && hourly.temp?.length > 0 && (
+              <>
+                <Widget title="Previsión por días (7 días)">
+                  <WidgetForecast hourly={hourly} />
+                </Widget>
+                <CreditsLabel title="OpenMeteo" link="https://open-meteo.com" />
+              </>
+            )}
           </div>
         </div>
       </div>
