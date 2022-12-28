@@ -2,7 +2,13 @@ import './WidgetDescription.scss'
 
 import axios from 'axios'
 import { useEffect, useState } from 'react'
-import { ActualHourCountry, isFog, isRain, isStorm } from '../../utils/Utils'
+import {
+  ActualHourCountry,
+  isFog,
+  isRain,
+  isSnow,
+  isStorm
+} from '../../utils/Utils'
 import Loader from '../Loader/Loader'
 
 const typeWeatherDescription = (code: number) => {
@@ -17,6 +23,9 @@ const typeWeatherDescription = (code: number) => {
   }
   if (isRain(code)) {
     return 'Lluvia pa refrescar el ambiente.'
+  }
+  if (isSnow(code)) {
+    return 'Hora de armar un muñeco de nieve'
   }
   if (isStorm(code)) {
     return 'Una tormenta importante'

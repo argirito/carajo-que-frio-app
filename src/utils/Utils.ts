@@ -19,32 +19,30 @@ export const isStorm = (code: number) => {
 const cloudly =
   'https://pikwizard.com/photos/sky-clouds-cloud--e64049d0bcbd344f58218af50c4aac56-m.jpg'
 const cloudlyNight =
-  'https://img.freepik.com/fotos-premium/luna-llena-detras-nubes_469558-18412.jpg?w=1800'
+  'https://images.pexels.com/photos/8394982/pexels-photo-8394982.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
 const rainDay =
-  'https://img.freepik.com/foto-gratis/lluvia-fuera-ventanas-villa_1321-908.jpg?w=2000&t=st=1666987282~exp=1666987882~hmac=ca54619c2b1d7c78a25d5fd0520ff08a2e3a40cbad6326616734721e6bcce631'
+  'https://images.pexels.com/photos/110874/pexels-photo-110874.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
 const rainNight =
   'https://img.freepik.com/foto-gratis/gotas-lluvia-ventana_1339-7321.jpg?w=2000&t=st=1666988402~exp=1666989002~hmac=c13fda53e6c1055bebd235b5dc8330f1a4eb09aa493f4fdcfacb1084cb9be413'
 const clearDay =
-  'https://img.freepik.com/foto-gratis/magnifica-vista-carretera-fin-cielo-azul-claro_181624-8968.jpg?w=2000&t=st=1669472288~exp=1669472888~hmac=a5e8e5865eadf39f30ad27e8ca35c616b3cecae24d53ea5b1055a80795636ce7'
+  'https://images.pexels.com/photos/12015374/pexels-photo-12015374.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
 const clearNight =
   'https://img.freepik.com/foto-gratis/hermosa-foto-primer-plano-extremo-media-luna_181624-4157.jpg?w=2000&t=st=1666988698~exp=1666989298~hmac=3c2021da0db14c048f4bf06b2e0ffb100f9249de4e52d6df6391e201ed871f3a'
 const fog =
   'https://img.freepik.com/fotos-premium/carretera-escenica-grandes-arboles-niebla-mistica-niebla-dia-otono_379823-3801.jpg?w=2000'
-// 'https://img.freepik.com/foto-gratis/arboles-al-lado-otro-bosque-cubiertos-niebla-que-arrastra_181624-16397.jpg?w=2000&t=st=1666992163~exp=1666992763~hmac=cf4a90c60c0ffdf8aab95b11ceb2b1a67b07364c413a4669a9c29b624da29ef7'
 const fogNight =
   'https://img.freepik.com/fotos-premium/siluetas-arboles-oscuros-bosque-espeluznante-niebla-nocturna-resplandor-misterioso-ilustracion-digital-3d_124717-1601.jpg?w=2000'
-// 'https://img.freepik.com/fotos-premium/luna-llena-sobre-nubes-niebla-cielo-nocturno-nebuloso-paisaje-borroso_284753-2035.jpg?w=2000'
 
 const storm =
-  'https://img.freepik.com/fotos-premium/supercell-tormenta-tormenta-tornado-advertencia-tiempo-concepto_492154-1421.jpg?w=2000'
+  'https://images.pexels.com/photos/1123445/pexels-photo-1123445.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
 
 const stormNight =
-  'https://img.freepik.com/foto-gratis/nubes-tormenta-relampagos-noche_335224-937.jpg?w=2000&t=st=1666992481~exp=1666993081~hmac=26b0340d37e91d532ba6e143df52b68e88759afd78e9f02554858ae908fa0f0f'
+  'https://images.pexels.com/photos/11019539/pexels-photo-11019539.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
 
 const snow =
   'https://img.freepik.com/foto-gratis/paisaje-carretera-selva-negra-cubierta-arboles-nieve-alemania_181624-54214.jpg?w=2000&t=st=1671226661~exp=1671227261~hmac=3a4300d4b4508a02e1b44d16000b7fb952fb31eb039f69a3bc69ae7b3123078f'
 const snowNight =
-  'https://img.freepik.com/foto-gratis/hermosa-foto-montana-cubierta-nieve-noche_181624-4160.jpg?w=2000&t=st=1671226715~exp=1671227315~hmac=07e2509ab232069dbb0679992c1ee72ae66ba5d0736e630ead3e9b5bb7b09f51'
+  'https://images.pexels.com/photos/358235/pexels-photo-358235.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
 
 export const typeBackground = (
   code: number,

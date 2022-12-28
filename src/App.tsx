@@ -10,7 +10,7 @@ import WidgetForecast from './Components/widget/WidgetForecast'
 import WidgetHour from './Components/widget/WidgetHourly'
 import WidgetSensation from './Components/widget/WidgetSensation'
 import WidgetWind from './Components/widget/WidgetWind'
-import { c, typeBackground } from './utils/Utils'
+import { typeBackground } from './utils/Utils'
 
 export type HourlyData = {
   actualHourCode: number
@@ -37,7 +37,8 @@ function App() {
         className="App-body-container"
         style={{
           backgroundImage: `url(${typeBackground(
-            hourly?.actualHourCode ?? -1,
+            2,
+            // hourly?.actualHourCode ?? -1,
             hourly?.date ?? new Date(),
             hourly?.country ?? 'ES'
           )})`
