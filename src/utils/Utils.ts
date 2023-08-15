@@ -17,7 +17,7 @@ export const isStorm = (code: number) => {
 }
 
 const cloudly =
-  'https://pikwizard.com/photos/sky-clouds-cloud--e64049d0bcbd344f58218af50c4aac56-m.jpg'
+  'https://images.pexels.com/photos/158163/clouds-cloudporn-weather-lookup-158163.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
 const cloudlyNight =
   'https://images.pexels.com/photos/8394982/pexels-photo-8394982.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
 const rainDay =
