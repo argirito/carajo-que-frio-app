@@ -40,6 +40,23 @@ const typeWeatherForecast = (code: number, date?: Date) => {
   return 'ERR'
 }
 
+const weatherIcons: Record<string, string> = {
+  h_sun: require('../../Images/h_sun.png'),
+  h_moon: require('../../Images/h_moon.png'),
+  h_cloud: require('../../Images/h_cloud.png'),
+  'h_cloud-sun': require('../../Images/h_cloud-sun.png'),
+  h_fog: require('../../Images/h_fog.png'),
+  h_rain: require('../../Images/h_rain.png'),
+  h_snow: require('../../Images/h_snow.png'),
+  h_storm: require('../../Images/h_storm.png'),
+  ERR: require('../../Images/ERR.png')
+}
+
+const getForecastIcon = (code: number) => {
+  const key = typeWeatherForecast(code, null)
+  return weatherIcons[key] || weatherIcons.ERR
+}
+
 const DayInfo = (
   array: HourlyData,
   firstIndex: number,
@@ -109,10 +126,7 @@ function WidgetForecast({ hourly }: { hourly: HourlyData }) {
                   <div className="widget-forecast-text">{item.day} </div>
                   <img
                     className="widget-forecast-icon"
-                    src={require(`../../Images/${typeWeatherForecast(
-                      item.code,
-                      null
-                    )}.png`)}
+                    src={getForecastIcon(item.code)}
                     alt=""
                   />
                   <div className="widget-forecast-temp">

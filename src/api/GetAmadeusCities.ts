@@ -27,7 +27,7 @@ export const getAmadeusCities = (text: string): Promise<any> =>
       const res = await axios({
         url: 'https://test.api.amadeus.com/v1/security/oauth2/token',
         method: 'POST',
-        data: 'grant_type=client_credentials&client_id=Qwb9soZOvW41hII2nH2Dmx0nWDGAknGw&client_secret=7db6qb5Osx0XVhXJ',
+        data: `grant_type=client_credentials&client_id=${process.env.AMADEUS_CLIENT_ID}&client_secret=${process.env.AMADEUS_CLIENT_SECRET}`,
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
         }

@@ -64,6 +64,23 @@ const typeWeatherHourly = (
   return 'ERR'
 }
 
+const weatherIcons: Record<string, string> = {
+  h_sun: require('../../Images/h_sun.png'),
+  h_moon: require('../../Images/h_moon.png'),
+  h_cloud: require('../../Images/h_cloud.png'),
+  'h_cloud-sun': require('../../Images/h_cloud-sun.png'),
+  h_fog: require('../../Images/h_fog.png'),
+  h_rain: require('../../Images/h_rain.png'),
+  h_snow: require('../../Images/h_snow.png'),
+  h_storm: require('../../Images/h_storm.png'),
+  ERR: require('../../Images/ERR.png')
+}
+
+const getWeatherIcon = (code: number, date?: Date, forecast: boolean = false) => {
+  const key = typeWeatherHourly(code, date, forecast)
+  return weatherIcons[key] || weatherIcons.ERR
+}
+
 function WidgetHour({ hourly }: { hourly: HourlyData }) {
   const [hours, setHours] = useState<hourItem[]>()
   const [isLoading, setIsLoading] = useState(true)
@@ -139,10 +156,7 @@ function WidgetHour({ hourly }: { hourly: HourlyData }) {
                       </div>
                       <img
                         className="widget-hour-icon"
-                        src={require(`../../Images/${typeWeatherHourly(
-                          item.code,
-                          item.hour
-                        )}.png`)}
+                        src={getWeatherIcon(item.code, item.hour)}
                         alt=""
                       />
                       <div className="widget-hour-temp">
@@ -158,9 +172,7 @@ function WidgetHour({ hourly }: { hourly: HourlyData }) {
                     </div>
                     <img
                       className="widget-hour-icon"
-                      src={require(`../../Images/${typeWeatherHourly(
-                        item.code
-                      )}.png`)}
+                      src={getWeatherIcon(item.code)}
                       alt=""
                     />
                     <div className="widget-hour-temp">
